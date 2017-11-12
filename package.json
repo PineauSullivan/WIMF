@@ -5,7 +5,6 @@
   "scripts": {
     "start": "foglet-scripts start",
     "stop": "foglet-scripts stop",
-    "build" : "cp -R ./node_modules/foglet-core/dist/* ./node_modules/bootstrap/dist/* ./node_modules/jquery/dist/jquery.min.js dist/"
   },
   "cacheDirectories": [
     "node_modules"
