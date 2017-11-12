@@ -4,11 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "foglet-scripts start",
-    "stop": "foglet-scripts stop",
+    "stop": "foglet-scripts stop"
   },
-  "cacheDirectories": [
-    "node_modules"
-],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PineauSullivan/WIMF.git"
