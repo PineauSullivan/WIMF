@@ -12,32 +12,37 @@
   </head>
 
   <body>
-    <div id="noconnect">
-      <form name="form">
-        <input name="mail" type="text">
-        <input type="button" name="Valide" value="Valider" onClick="authentification(this.form)">
-      </form>
-    </div>
-    <div id="connect">
-      <div id="top">
-        <div id="map_canvas"></div>
-      </div>
-      <div id="bottom">
-          <input id="mailFriend" name="mailFriend" type="text">
-          <button id="addFriend">Ajouter</button>
-          <table id="tableau">
-            <tr>
-              <th>Liste Amis :</th>
-              <th>Liste demandes Amis en attente :</th>
-              <th>Liste ajout amis en attente :</th>
-            </tr>
-            <tr>
-              <th><div id="listeAmis"></div></th>
-              <th><div id="listeDemandeAmisEnAttente"></div></th>
-              <th><div id="listeAjoutAmisEnAttente"></div></th>
-            </tr>
-          </table>
-      </div>
-    </div>
+
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div id="noconnect">
+    Veuillez saisir votre mail afin de pouvoir communiquer avec vos amis :
+    <form name="form">
+      <input name="mail" type="text">
+      <input type="button" name="Valide" value="Valider" onClick="authentification(this.form)">
+    </form>
+  </div>
+  <div id="connect">
+    Veuillez saisir le mail de votre amis :
+    <input id="mailFriend" name="mailFriend" type="text">
+    <button id="addFriend">Ajouter</button>
+    Liste Amis :
+    <a><div id="listeAmis"></div></a>
+    Liste demandes Amis en attente :
+    <a><div id="listeDemandeAmisEnAttente"></div></a>
+    Liste ajout amis en attente :
+    <a><div id="listeAjoutAmisEnAttente"></div></a>
+  </div>
+</div>
+
+<div id="main">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  <div id="map_canvas"></div>
+</div>
+
+
+    
+     
   </body>
 </html> 
