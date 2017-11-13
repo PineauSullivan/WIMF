@@ -76,3 +76,22 @@ table, th, td{
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+#listeAmis input[type="button"] {
+    background-color: #ffa500; 
+    border: solid 1px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 100%;
+}
+
+#listeAmis input[type="button"]:hover {
+    background-color: #999999;
+    color: white;
+}

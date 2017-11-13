@@ -3,6 +3,13 @@
 const Foglet = require('foglet').Foglet
 
 var mail;
+var longitude,latitude;
+var map;
+var marker = null;
+
+var amis =  [];
+var listeAjoutAmisEnAttente = [];
+var listeDemandeAmisEnAttente = [];
 
 function authentification(nForm){
   if(nForm.mail.value!=""){
@@ -12,6 +19,12 @@ function authentification(nForm){
     var divConnect = document.getElementById("connect");
     divNoConnect.style.display = "none";
     divConnect.style.display = "initial";
+  }
+}
+
+function centerAmi(i){
+  if(amis[i].latitude!=null&&amis[i].longitude!=null){
+    map.panTo(new google.maps.LatLng(amis[i].latitude, amis[i].longitude));
   }
 }
 
@@ -54,13 +67,6 @@ app.share()
 app.connection()
 .then(() => {
   console.log('application connected!')
-  var longitude,latitude;
-
-  var amis =  [];
-  var listeAjoutAmisEnAttente = [];
-  var listeDemandeAmisEnAttente = [];
-
-  var amisInitialiseBool = true;
 
   // listen for incoming broadcast
   app.onUnicast((id, msg) => {
@@ -74,7 +80,6 @@ app.connection()
     traiterMessage(id, msg);
   })
 
-  var map;
   function addMap(){ 
     map = new google.maps.Map(document.getElementById("map_canvas"), {
             zoom: 19,
@@ -85,18 +90,27 @@ app.connection()
     if (navigator.geolocation)
       var watchId = navigator.geolocation.watchPosition(successCallback,
                                 null,
-                                {enableHighAccuracy:true});
+                                {enableHighAccuracy:true,
+                                timeout:10000,
+                                maximumAge:0});
     else
       alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
 
     function successCallback(position){
-      map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
       longitude = position.coords.longitude;
       latitude = position.coords.latitude;
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-        map: map
-      });
+      if(marker==null){
+        map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+          map: map,
+          title: "Moi",
+          icon: "https://mt.googleapis.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=0288D1&scale=2.0"
+        });
+      }else{
+        marker.setPosition({lat: latitude, lng: longitude});
+        console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);    
+      }
     }
   }
 
@@ -137,16 +151,18 @@ app.connection()
       amis[position].longitude = msg.longitude; 
       if(amis[position].marker == null){
         console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
+        var infowindow = new google.maps.InfoWindow({
+          content: amis[position].mail
+        });
         var marker= new google.maps.Marker({
           position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
-          map: map
+          map: map,
+          title: amis[position].mail,
+          icon: "http://tcc.co.uk/wp-content/themes/tcc_2013/images/googlemap-icon.png"
         });;
-        google.maps.event.addListener(marker, 'click', (function(marker, position) {
-          return function(){
-            map.InfoWindow().setContent(amis[position].mail);
-            map.InfoWindow().open(map,marker);
-          }
-        }))
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
         amis[position].marker = marker;
       }else{
         console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
@@ -183,7 +199,6 @@ app.connection()
     if(!findFriend(amis, info.mail)){
       amis.push(info);
       actualiseListeAmis();
-      SendPosition();
     }
 
   }
@@ -192,10 +207,12 @@ app.connection()
     var data = {"type" : "Location", "emeteur" : mail , "latitude" : latitude, "longitude" : longitude};
     for(var i= 0; i<amis.length; ++i){
       console.log("Envoie pos à "+amis[i].id+" - "+amis[i].mail);    
-      app.sendUnicast(amis[0].id, data);
+      app.sendUnicast(amis[i].id, data);
     }
     setTimeout(SendPosition, 10000)
   }
+
+  SendPosition();
   //-----------------------------------------//
   //Add Friend
   //-----------------------------------------//
@@ -203,7 +220,7 @@ app.connection()
   btnAddFriend.addEventListener("click", () => {
     if(document.getElementById("mailFriend").value != ""){
       if(!findFriend(listeAjoutAmisEnAttente,document.getElementById("mailFriend").value)){
-        var infoAmi = {"mail" :  document.getElementById("mailFriend").value, "id" : 0, "latitude" : 0, "longitude" : 0, "marker" : null};
+        var infoAmi = {"mail" :  document.getElementById("mailFriend").value, "id" : 0, "latitude" : null, "longitude" : null, "marker" : null};
         var data = {"type" : "AjoutAmi", "emeteur" : mail ,"destinataire" : document.getElementById("mailFriend").value};
         if(findFriend(listeDemandeAmisEnAttente,document.getElementById("mailFriend").value)){
           var position = -1;
@@ -250,14 +267,18 @@ app.connection()
   function actualiseListeAmis(){
     var listText = "";
         for(var i = 0; i<amis.length; i++){
-          if(i<amis.length - 1){
-            listText = listText + amis[i].mail+", ";
-          }else{
-            listText = listText + amis[i].mail+".";
-          }
+          // if(i<amis.length - 1){
+
+          //   listText = listText + "<a>"+amis[i].mail+"</a>";
+          // }else{
+          //   listText = listText + amis[i].mail+".";
+          // }
+            listText = listText + '<input type="button" name="Valide" value="'+amis[i].mail+'" onClick="centerAmi('+i+')">';
         }
         document.getElementById("listeAmis").innerHTML = listText;
   }
+
+
   //-----------------------------------------//
   //Find Friend
   //-----------------------------------------//
@@ -274,7 +295,3 @@ app.connection()
 
 })
 .catch(console.error) // catch connection errors
-
-function addFriend(nForm){
-
-}
