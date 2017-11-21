@@ -3,8 +3,7 @@ node_js: node
 
 install:
   - npm install
-  - npm install --save foglet-core
-  - npm install --save-dev foglet-scripts
+  - npm run build
 
 deploy:
   provider: pages

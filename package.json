@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "foglet-scripts start",
-    "stop": "foglet-scripts stop"
+    "build": "cp -R ./node_modules/foglet-core/dist/* dist/"
   },
   "repository": {
     "type": "git",
