@@ -9,7 +9,10 @@ function create(nForm){
 	     var res = JSON.parse(xhr.responseText);
 	     console.log('response: ',res);
 	     if(res.s=="ok"){
+		    document.getElementById("buttonCreate").style.backgroundColor = "green";
 	     	document.location.href="app/index.html?"+channel;
+	     }else{
+		    document.getElementById("buttonCreate").style.backgroundColor = "red";
 	     }
 	 }
 	}
