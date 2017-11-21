@@ -15,11 +15,6 @@ body{
   margin-top: 10px;
 }
 
-#connect{
-  display: none;
-}
-
-
 #bottom{
   display: inline-block;
   width: 100%;
@@ -94,4 +89,8 @@ table, th, td{
 #listeAmis input[type="button"]:hover {
     background-color: #999999;
     color: white;
+}
+
+#Connect{
+  display: none;
 }

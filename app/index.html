@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foglet Hello world</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyC4A3ptbRC0DKkXdXWXQZukQsXwzkr2qtg"></script>
+    <!-- foglet-core bundle -->
+    <script src="../node_modules/foglet-core/dist/foglet.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+
+  </head>
+
+  <body>
+<div id="mySidenav" class="sidenav">
+  <div id="noConnect">
+    <form name="form">
+      <input name="pseudo" type="text">
+      <input type="button" name="Valider" value="Valide" onClick="authentification(this.form)">
+    </form>
+  </div>
+  <div id="Connect">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    Liste Amis :
+    <div id="listeAmis"></div>
+  </div>
+</div>
+
+<div id="main">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+  <div id="map_canvas"></div>
+</div>
+
+
+    
+     
+  </body>
+</html> 

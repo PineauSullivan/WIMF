@@ -2,47 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Foglet Hello world</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyC4A3ptbRC0DKkXdXWXQZukQsXwzkr2qtg"></script>
-    <!-- foglet-core bundle -->
-    <script src="node_modules/foglet-core/dist/foglet.bundle.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="app.js"></script>
   </head>
-
   <body>
-
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div id="noconnect">
-    Veuillez saisir votre mail afin de pouvoir communiquer avec vos amis :
     <form name="form">
-      <input name="mail" type="text">
-      <input type="button" name="Valide" value="Valider" onClick="authentification(this.form)">
+      Channel :
+      <input name="channel" type="text">
+      <input type="button" name="Join" value="Join" onClick="join(this.form)">
+      <input type="button" name="Create" value="Create" onClick="create(this.form)">
     </form>
-  </div>
-  <div id="connect">
-    Veuillez saisir le mail de votre amis :
-    <input id="mailFriend" name="mailFriend" type="text">
-    <button id="addFriend">Ajouter</button>
-    Liste Amis :
-    <div id="listeAmis"></div>
-    Liste demandes Amis en attente :
-    <div id="listeDemandeAmisEnAttente"></div>
-    Liste ajout amis en attente :
-    <div id="listeAjoutAmisEnAttente"></div>
-  </div>
-</div>
-
-<div id="main">
-  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-  <div id="map_canvas"></div>
-</div>
-
-
-    
-     
   </body>
 </html> 
