@@ -8,6 +8,9 @@ function create(nForm){
 	 if(xhr.readyState == 4 && xhr.status == 200){
 	     var res = JSON.parse(xhr.responseText);
 	     console.log('response: ',res);
+	     if(res.s=="ok"){
+	     	document.location.href="app/index.html?"+channel;
+	     }
 	 }
 	}
 
@@ -16,6 +19,7 @@ function create(nForm){
 	xhr.send();
 
   }
+
 }
 
 function join(nForm){

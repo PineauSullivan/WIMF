@@ -1,0 +1,55 @@
+body {
+    background-color: #2b2b2b;
+}
+
+.center-div{
+	position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+    background-color: orange;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+h1, #channel{
+	color:white;
+}
+
+input[type="text"] {
+    width: 98%;
+    padding: 6px;
+}
+
+
+em {
+    font-size: small;
+}
+
+.button{
+	background-color: white;
+	border:none;
+	color:black;
+	padding: 6px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	cursor: pointer;
+	border: 2px solid #2b2b2b;
+	width: 100%;
+}
+
+.button:hover{
+	background-color: #2b2b2b;
+	color: white;
+}
+
