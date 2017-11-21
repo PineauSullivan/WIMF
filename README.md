@@ -7,4 +7,4 @@ After cloning this repository
 > npm install
 > npm run build
 
-## Site : [lien] (https://pineausullivan.github.io/WIMF/) ! 
+## Site : [lien](https://pineausullivan.github.io/WIMF/) ! 
