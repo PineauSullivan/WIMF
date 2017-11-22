@@ -13,7 +13,7 @@ function authentification(nForm){
     var divConnect = document.getElementById("Connect");
     divNoConnect.style.display = "none";
     divConnect.style.display = "initial";
-    alert("Vous êtes désormais authentifier avec le mail : "+nForm.pseudo.value);
+    alert("Vous êtes désormais authentifier avec le pseudo : "+nForm.pseudo.value);
   }
 }
 
@@ -147,107 +147,105 @@ $.ajax({
 
       addMap();
 
-      //-----------------------------------------//
-      //traitement d'un message
-      //-----------------------------------------//
-      function traiterMessage(id, msg){
-        if(pseudo != ""){
-          console.log("Traitement du message en cours ... ...");
-          console.log("Type du message : "+msg.type);
-          var infoAmi = {"pseudo" : msg.emeteur, "id" : id, "latitude" : 0, "longitude" : 0, "marker" : null};
-          gestionAmis(infoAmi);
-          actualisePosition(id, msg);
-        }
-      }
-
-      function actualisePosition(id, msg){
-        var position = -1;
-        for(var i = 0; i<amis.length; i++){
-          if(amis[i].pseudo == msg.emeteur){
-            position = i;
-          }
-        }
-        if(position!=-1){
-          amis[position].latitude = msg.latitude;
-          amis[position].longitude = msg.longitude; 
-          if(amis[position].marker == null){
-            console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
-            var infowindow = new google.maps.InfoWindow({
-              content: amis[position].pseudo
-            });
-            var marker= new google.maps.Marker({
-              position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
-              map: map,
-              title: amis[position].pseudo,
-              icon: "iconPositionAmi.png"
-            });;
-            marker.addListener('click', function() {
-              infowindow.open(map, marker);
-            });
-            amis[position].marker = marker;
-          }else{
-            console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
-            amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
-          }
-        }
-      }
-      //-----------------------------------------//
-      //gestion amis
-      //-----------------------------------------//
-      function gestionAmis(info){
-        // //ajout dans la liste amis
-        if(!findFriend(amis, info.pseudo)){
-          amis.push(info);
-          actualiseListeAmis();
-        }
-
-      }
-
-      function SendPosition(){
-        var data = {"type" : "Location", "emeteur" : pseudo , "latitude" : latitude, "longitude" : longitude};
-        app.sendBroadcast(data);
-        setTimeout(SendPosition, 10000)
-      }
-
-      function wait(){
-        if(pseudo==""){
-          setTimeout(wait, 10000);
-          console.log("Pas authentifié ! En attendre...");
-        }else{
-          SendPosition();
-        }
-      }
-
-      wait();
-
-      function actualiseListeAmis(){
-        var listText = "";
-        for(var i = 0; i<amis.length; i++){
-            listText = listText + '<input type="button" name="Valide" value="'+amis[i].pseudo+'" onClick="centerAmi('+i+')">';
-        }
-        document.getElementById("listeAmis").innerHTML = listText;
-      }
-
-
-      //-----------------------------------------//
-      //Find Friend
-      //-----------------------------------------//
-      function findFriend(List, pseudo){
-        var result = false;
-        for(var i = 0; i<List.length; i++){
-          if(List[i].pseudo==pseudo){
-            result = true;
-          }
-        }
-        return result;
-      }
-
-
     })
     .catch(console.error) // catch connection errors
 
   }
 });
 
+//-----------------------------------------//
+//traitement d'un message
+//-----------------------------------------//
+function traiterMessage(id, msg){
+  if(pseudo != ""){
+    console.log("Traitement du message en cours ... ...");
+    console.log("Type du message : "+msg.type);
+    var infoAmi = {"pseudo" : msg.emeteur, "id" : id, "latitude" : 0, "longitude" : 0, "marker" : null};
+    gestionAmis(infoAmi);
+    actualisePosition(id, msg);
+  }
+}
+
+function actualisePosition(id, msg){
+  var position = -1;
+  for(var i = 0; i<amis.length; i++){
+    if(amis[i].pseudo == msg.emeteur){
+      position = i;
+    }
+  }
+  if(position!=-1){
+    amis[position].latitude = msg.latitude;
+    amis[position].longitude = msg.longitude; 
+    if(amis[position].marker == null){
+      console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
+      var infowindow = new google.maps.InfoWindow({
+        content: amis[position].pseudo
+      });
+      var marker= new google.maps.Marker({
+        position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
+        map: map,
+        title: amis[position].pseudo,
+        icon: "iconPositionAmi.png"
+      });;
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+      amis[position].marker = marker;
+    }else{
+      console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
+      amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
+    }
+  }
+}
+//-----------------------------------------//
+//gestion amis
+//-----------------------------------------//
+function gestionAmis(info){
+  // //ajout dans la liste amis
+  if(!findFriend(amis, info.pseudo)){
+    amis.push(info);
+    actualiseListeAmis();
+  }
+
+}
+
+function SendPosition(){
+  var data = {"type" : "Location", "emeteur" : pseudo , "latitude" : latitude, "longitude" : longitude};
+  app.sendBroadcast(data);
+  setTimeout(SendPosition, 10000)
+}
+
+function wait(){
+  if(pseudo==""){
+    setTimeout(wait, 10000);
+    console.log("Pas authentifié ! En attendre...");
+  }else{
+    SendPosition();
+  }
+}
+
+wait();
+
+function actualiseListeAmis(){
+  var listText = "";
+  for(var i = 0; i<amis.length; i++){
+      listText = listText + '<input type="button" name="Valide" value="'+amis[i].pseudo+'" onClick="centerAmi('+i+')">';
+  }
+  document.getElementById("listeAmis").innerHTML = listText;
+}
+
+
+//-----------------------------------------//
+//Find Friend
+//-----------------------------------------//
+function findFriend(List, pseudo){
+  var result = false;
+  for(var i = 0; i<List.length; i++){
+    if(List[i].pseudo==pseudo){
+      result = true;
+    }
+  }
+  return result;
+}
 
 // alert("Vous devez vous authentifier afin de pouvoir recevoir les possition des personnes connectés !");
