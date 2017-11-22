@@ -250,4 +250,4 @@ $.ajax({
 });
 
 
-alert("Vous devez vous authentifier afin de pouvoir recevoir les possition des personnes connectés !");
+// alert("Vous devez vous authentifier afin de pouvoir recevoir les possition des personnes connectés !");
