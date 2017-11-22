@@ -179,7 +179,7 @@ $.ajax({
               position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
               map: map,
               title: amis[position].pseudo,
-              icon: "http://tcc.co.uk/wp-content/themes/tcc_2013/images/googlemap-icon.png"
+              icon: "https://tcc.co.uk/wp-content/themes/tcc_2013/images/googlemap-icon.png"
             });;
             marker.addListener('click', function() {
               infowindow.open(map, marker);
