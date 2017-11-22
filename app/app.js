@@ -50,6 +50,42 @@ function closeNav() {
 
 var iceServers;
 
+function addMap(){ 
+  map = new google.maps.Map(document.getElementById("map_canvas"), {
+          zoom: 19,
+          center: new google.maps.LatLng(47.2172500, -1.5533600),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+  if (navigator.geolocation)
+    var watchId = navigator.geolocation.watchPosition(successCallback,
+                              null,
+                              {enableHighAccuracy:true,
+                              timeout:10000,
+                              maximumAge:0});
+  else
+    alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+
+  function successCallback(position){
+    longitude = position.coords.longitude;
+    latitude = position.coords.latitude;
+    if(marker==null){
+      map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+        map: map,
+        title: "Moi",
+        icon: "https://mt.googleapis.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=0288D1&scale=2.0"
+      });
+    }else{
+      marker.setPosition({lat: latitude, lng: longitude});
+      console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);    
+    }
+  }
+}
+
+addMap();
+
 $.ajax({
   url : "https://service.xirsys.com/",
   data : {
@@ -111,41 +147,6 @@ $.ajax({
         traiterMessage(id, msg);
       })
 
-      function addMap(){ 
-        map = new google.maps.Map(document.getElementById("map_canvas"), {
-                zoom: 19,
-                center: new google.maps.LatLng(47.2172500, -1.5533600),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-              });
-
-        if (navigator.geolocation)
-          var watchId = navigator.geolocation.watchPosition(successCallback,
-                                    null,
-                                    {enableHighAccuracy:true,
-                                    timeout:10000,
-                                    maximumAge:0});
-        else
-          alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
-
-        function successCallback(position){
-          longitude = position.coords.longitude;
-          latitude = position.coords.latitude;
-          if(marker==null){
-            map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-            marker = new google.maps.Marker({
-              position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-              map: map,
-              title: "Moi",
-              icon: "https://mt.googleapis.com/vt/icon/name=icons/onion/SHARED-mymaps-pin-container_4x.png,icons/onion/1899-blank-shape_pin_4x.png&highlight=0288D1&scale=2.0"
-            });
-          }else{
-            marker.setPosition({lat: latitude, lng: longitude});
-            console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);    
-          }
-        }
-      }
-
-      addMap();
 
       //-----------------------------------------//
       //traitement d'un message
