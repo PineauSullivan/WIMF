@@ -75,7 +75,7 @@ $.ajax({
       rps: {
         type: 'spray-wrtc',
         options: {
-          protocol: "foglet-hello-world", // name of the protocol run by your app
+          protocol: channel, // name of the protocol run by your app
           webrtc: { // WebRTC options
             trickle: true, // enable trickle (divide offers in multiple small offers sent by pieces)
             iceServers : iceServers // iceServers, we lkeave it empty for now
