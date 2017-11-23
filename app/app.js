@@ -53,8 +53,8 @@ var iceServers;
 $.ajax({
   url : "https://service.xirsys.com/",
   data : {
-    ident: "PineauSullivan",
-    secret: "48adce60-cbf8-11e7-8662-39c68c71e856",
+    ident: "WhereIsMyFriends",
+    secret: "3fea7eb8-d07b-11e7-be18-fd777e1dd627",
     domain: "www.wimf.com",
     application: "wimf-foglet",
     room: channel,
