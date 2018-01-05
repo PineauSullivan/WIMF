@@ -184,15 +184,15 @@ function actualisePosition(id, msg){
     var heure = now.getHours();
     var minute = now.getMinutes();
     var seconde = now.getSeconds();
+    var infowindow = new google.maps.InfoWindow({
+      content: "amis[position].pseudo /b"+heure+"h"+minute+"m"+seconde+"s"
+    });
     if(amis[position].marker == null){
       console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
-      var infowindow = new google.maps.InfoWindow({
-        content: amis[position].pseudo
-      });
       var marker= new google.maps.Marker({
         position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
         map: map,
-        title: amis[position].pseudo+" - "+heure+"h"+minute+"m"+seconde+"s",
+        title: amis[position].pseudo,
         icon: "iconPositionAmi.png"
       });;
       marker.addListener('click', function() {
@@ -202,7 +202,10 @@ function actualisePosition(id, msg){
     }else{
       console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
       amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
-      amis[position].marker.setTitle(amis[position].pseudo+" - "+heure+"h"+minute+"m"+seconde+"s");
+      map.event.clearListeners(marker, 'click');
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
     }
   }
 }
