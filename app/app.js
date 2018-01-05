@@ -177,6 +177,13 @@ function actualisePosition(id, msg){
   if(position!=-1){
     amis[position].latitude = msg.latitude;
     amis[position].longitude = msg.longitude; 
+    var now = new Date();
+    var annee =  now.getFullYear();
+    var mois = now.getMonth()+1;
+    var jour = now.getDate();
+    var heure = now.getHours();
+    var minute = now.getMinutes();
+    var seconde = now.getSeconds();
     if(amis[position].marker == null){
       console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
       var infowindow = new google.maps.InfoWindow({
@@ -185,7 +192,7 @@ function actualisePosition(id, msg){
       var marker= new google.maps.Marker({
         position: new google.maps.LatLng(amis[position].latitude, amis[position].longitude),
         map: map,
-        title: amis[position].pseudo,
+        title: amis[position].pseudo+" - "+heure+"h"+minute+"m"+seconde+"s",
         icon: "iconPositionAmi.png"
       });;
       marker.addListener('click', function() {
@@ -195,6 +202,7 @@ function actualisePosition(id, msg){
     }else{
       console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
       amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
+      amis[position].marker.setTitle(amis[position].pseudo+" - "+heure+"h"+minute+"m"+seconde+"s");
     }
   }
 }
