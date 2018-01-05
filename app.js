@@ -12,32 +12,29 @@ function guid() {
 var channelG =  guid();
 
 function create(nForm){
-	console.log('Création channel : ',channelG);
-	while(!createChannel()){
-		channelG =  guid();
-	}
-}
+	console.log('channel: ',channelG);
 
-function createChannel(){
-	var xhr = new XMLHttpRequest();
-	var test = false;
+  	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function($evt){
-		if(xhr.readyState == 4 && xhr.status == 200){
-		     var res = JSON.parse(xhr.responseText);
-		     console.log('response: ',res);
-		     if(res.s=="ok"){
-			    document.getElementById("buttonCreate").style.backgroundColor = "green";
-		     	test = true;
-		     	document.location.href="app/index.html?"+channelG;
-		     }else{
-			    test = false;
-		     }
-		}
-		xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channelG, true);
-		xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
-		xhr.send();
+	if(xhr.readyState == 4 && xhr.status == 200){
+	     var res = JSON.parse(xhr.responseText);
+	     console.log('response: ',res);
+	     if(res.s=="ok"){
+		    document.getElementById("buttonCreate").style.backgroundColor = "green";
+	     	document.location.href="app/index.html?"+channelG;
+	     }else{
+		    channelG =  guid();
+		    document.getElementById("buttonCreate").style.backgroundColor = "red";
+	     }
+	}
+
+
+	xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channelG, true);
+	xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
+	xhr.send();
+
   }
-  return test;
+
 }
 
 function join(nForm){
