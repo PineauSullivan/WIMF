@@ -8,10 +8,11 @@ function guid() {
 	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + 
 	s4() + '-' + s4() + s4() + s4();
 }
+var channelG = guid();
 function create(nForm){
-	if(nForm.channel.value!=""){
-	  	var channel = nForm.channel.value;
-		console.log('channel: ',channel);
+	// if(nForm.channel.value!=""){
+	  	// var channel = nForm.channel.value;
+		console.log('channel: ',channelG);
 
 	  	var xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = function($evt){
@@ -20,16 +21,16 @@ function create(nForm){
 			     console.log('response: ',res);
 			     if(res.s=="ok"){
 				    document.getElementById("buttonCreate").style.backgroundColor = "green";
-			     	document.location.href="app/index.html?"+channel;
+			     	document.location.href="app/index.html?"+channelG;
 			     }else{
 				    document.getElementById("buttonCreate").style.backgroundColor = "red";
 			     }
 			}
 		}
-		xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channel, true);
+		xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channelG, true);
 		xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
 		xhr.send();
-	}
+	// }
 }
 
 function join(nForm){
