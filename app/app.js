@@ -185,7 +185,7 @@ function actualisePosition(id, msg){
     var minute = now.getMinutes();
     var seconde = now.getSeconds();
     var infowindow = new google.maps.InfoWindow({
-      content: amis[position].pseudo "<br>"+heure+"h"+minute+"m"+seconde+"s"
+      content: amis[position].pseudo+"<br>"+heure+"h"+minute+"m"+seconde+"s"
     });
     if(amis[position].marker == null){
       console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
