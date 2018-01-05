@@ -208,9 +208,9 @@ function actualisePosition(id, msg){
     }else{
       console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
       amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
-      google.maps.event.clearListeners(marker, 'click');
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
+      google.maps.event.clearListeners(amis[position].marker, 'click');
+      amis[position].marker.addListener('click', function() {
+        infowindow.open(map, amis[position].marker);
       });
     }
   }
