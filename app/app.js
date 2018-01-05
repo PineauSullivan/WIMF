@@ -48,6 +48,11 @@ function closeNav() {
 }
 
 
+function copypasta(){
+  strContent = document.getElementById('link').innerText;
+  window.clipboardData.setData("Text", strContent);
+}
+
 var iceServers;
 
 $.ajax({
