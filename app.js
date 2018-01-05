@@ -17,8 +17,8 @@ function create(nForm){
 	 }
 	}
 
-	xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channel, true);
-	xhr.setRequestHeader ("Authorization", "Basic " + btoa("PineauSullivan:48adce60-cbf8-11e7-8662-39c68c71e856") );
+	xhr.open('PUT', "https://ws.xirsys.com/_turn/www.wimf.com/wimf-foglet/"+channel, true);
+	xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
 	xhr.send();
 
   }
