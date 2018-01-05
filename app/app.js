@@ -3,6 +3,7 @@
 const Foglet = require('foglet').Foglet;
 let app;
 var channel = window.location.search.substring(1);
+document.getElementById("link").value = "https://pineausullivan.github.io/WIMF/app/index.html?"+channel;
 var pseudo = "";
 
 
