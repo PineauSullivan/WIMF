@@ -49,7 +49,7 @@ function closeNav() {
 
 
 function copypasta(){
-  strContent = document.getElementById('link').innerText;
+  strContent = document.getElementById('link').value;
   window.clipboardData.setData("Text", strContent);
 }
 
