@@ -185,7 +185,7 @@ function actualisePosition(id, msg){
     var minute = now.getMinutes();
     var seconde = now.getSeconds();
     var infowindow = new google.maps.InfoWindow({
-      content: "amis[position].pseudo /b"+heure+"h"+minute+"m"+seconde+"s"
+      content: amis[position].pseudo "<br>"+heure+"h"+minute+"m"+seconde+"s"
     });
     if(amis[position].marker == null){
       console.log("Nouveau Marker en : "+amis[position].latitude +", "+amis[position].longitude);
@@ -202,7 +202,7 @@ function actualisePosition(id, msg){
     }else{
       console.log("update marker en  : "+amis[position].latitude +", "+amis[position].longitude);
       amis[position].marker.setPosition({lat: amis[position].latitude, lng: amis[position].longitude});
-      map.event.clearListeners(marker, 'click');
+      google.maps.event.clearListeners(marker, 'click');
       marker.addListener('click', function() {
         infowindow.open(map, marker);
       });
