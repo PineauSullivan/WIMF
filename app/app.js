@@ -154,7 +154,7 @@ function addMap(){
       });
     }else{
       marker.setPosition({lat: latitude, lng: longitude});
-      console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);
+      console.log("Actualisation de votre propre position, lat : "+latitude+", lng : "+longitude);
     }
   }
 }
@@ -319,4 +319,4 @@ function findFriend(List, pseudo){
   return result;
 }
 
-// alert("Vous devez vous authentifier afin de pouvoir recevoir les possition des personnes connectés !");
+// alert("Vous devez vous authentifier afin de pouvoir recevoir les position des personnes connectés !");
