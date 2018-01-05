@@ -73,7 +73,6 @@ table, th, td{
 }
 
 #listeAmis input[type="button"] {
-    background-color: #ffa500; 
     border: solid 1px;
     color: white;
     text-align: center;
@@ -87,7 +86,7 @@ table, th, td{
 }
 
 #listeAmis input[type="button"]:hover {
-    background-color: #999999;
+    background-color: #999999 !important;
     color: white;
 }
 

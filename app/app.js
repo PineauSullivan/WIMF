@@ -4,7 +4,7 @@ const Foglet = require('foglet').Foglet;
 let app;
 var channel = window.location.search.substring(1);
 var pseudo = "";
-
+var nbInactifs = 0;
 
 function authentification(nForm){
   if(nForm.pseudo.value!=""){
@@ -213,6 +213,10 @@ function actualisePosition(id, msg){
         infowindow.open(map, amis[position].marker);
       });
     }
+    amis[position].inactivif =false;
+    amis[position].heure = heure;
+    amis[position].minute = minute;
+    amis[position].seconde = seconde;
   }
 }
 //-----------------------------------------//
@@ -230,7 +234,52 @@ function gestionAmis(info){
 function SendPosition(){
   var data = {"type" : "Location", "emeteur" : pseudo , "latitude" : latitude, "longitude" : longitude};
   app.sendBroadcast(data);
+  rechercheInactivite();
   setTimeout(SendPosition, 10000)
+}
+
+function rechercheInactivite(){
+  var now = new Date();
+  var heure = now.getHours();
+  var minute = now.getMinutes();
+  var seconde = now.getSeconds();
+  var forceractualisation = false;
+  var cptInactifs = 0;
+
+  for(var i = 0; i<amis.length; i++){
+    var inactivif = true;
+    if(parseInt(heure)==parseInt(amis[i].heure)){
+      if(parseInt(minute) ==parseInt(amis[i].minute)){
+        inactivif = false;
+      }else{
+        if(parseInt(minute) == ((parseInt(amis[i].minute)+1)%60) ){
+          inactivif = false;
+        }
+      }
+    }else if(parseInt(heure)==((parseInt(amis[i].heure)+1)%24) ) {
+      if((parseInt(amis[i].minute)>57) && (parseInt(minute)<2)){
+        inactivif = false;
+      }
+
+    }
+    if(amis[i].inactivif != inactivif){
+      console.log("Ami inactif détecté: "+amis[i].pseudo+" - "+amis[i].heure+"h"+amis[i].minute+"h"+amis[i].seconde+"s");
+      amis[i].inactivif = inactivif;
+      forceractualisation= true;
+    }
+    if(amis[i].inactivif){
+      cptInactifs++;
+    }
+  }
+  if(forceractualisation){
+    nbInactifs=cptInactifs;
+    actualiseListeAmis();    
+  }  
+  if(cptInactifs<nbInactifs){
+    nbInactifs=cptInactifs;
+    console.log("Ami(s) reconnecté(s)");
+    actualiseListeAmis();    
+  }
 }
 
 function wait(){
@@ -247,7 +296,11 @@ wait();
 function actualiseListeAmis(){
   var listText = "";
   for(var i = 0; i<amis.length; i++){
-      listText = listText + '<input type="button" name="Valide" value="'+amis[i].pseudo+'" onClick="centerAmi('+i+')">';
+      if(amis[i].inactivif){
+        listText = listText + '<input style="background-color: #822353;" type="button" name="Valide" value="'+amis[i].pseudo+'" onClick="centerAmi('+i+')">';
+      }else{
+        listText = listText + '<input style="background-color: #ffa500;" type="button" name="Valide" value="'+amis[i].pseudo+'" onClick="centerAmi('+i+')">';        
+      }
   }
   document.getElementById("listeAmis").innerHTML = listText;
 }
