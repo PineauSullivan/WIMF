@@ -50,9 +50,8 @@ function closeNav() {
 
 
 function copypasta(){
-  var strContent;
-  strContent = document.getElementById('link').value;
-  window.clipboardData.setData("Text", strContent);
+  document.getElementById('link').select();
+  document.execCommand('copy');
 }
 
 var iceServers;
