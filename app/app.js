@@ -125,7 +125,7 @@ $.ajax({
 });
 
 
-function addMap(){ 
+function addMap(){
   map = new google.maps.Map(document.getElementById("map_canvas"), {
           zoom: 19,
           center: new google.maps.LatLng(47.2172500, -1.5533600),
@@ -154,7 +154,7 @@ function addMap(){
       });
     }else{
       marker.setPosition({lat: latitude, lng: longitude});
-      console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);    
+      console.log("Actualisation de votre propre possition, lat : "+latitude+", lng : "+longitude);
     }
   }
 }
@@ -182,7 +182,7 @@ function actualisePosition(id, msg){
   }
   if(position!=-1){
     amis[position].latitude = msg.latitude;
-    amis[position].longitude = msg.longitude; 
+    amis[position].longitude = msg.longitude;
     var now = new Date();
     var annee =  now.getFullYear();
     var mois = now.getMonth()+1;
@@ -236,7 +236,7 @@ function SendPosition(){
 function wait(){
   if(pseudo==""){
     setTimeout(wait, 10000);
-    console.log("Pas authentifié ! En attendre...");
+    console.log("Pas authentifié ! En attente...");
   }else{
     SendPosition();
   }
