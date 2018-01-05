@@ -3,7 +3,6 @@
 const Foglet = require('foglet').Foglet;
 let app;
 var channel = window.location.search.substring(1);
-document.getElementById("link").value = "https://pineausullivan.github.io/WIMF/app/index.html?"+channel;
 var pseudo = "";
 
 
@@ -40,6 +39,7 @@ function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    document.getElementById("link").value = channel;
 }
 
 function closeNav() {
