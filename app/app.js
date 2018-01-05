@@ -13,7 +13,7 @@ function authentification(nForm){
     var divConnect = document.getElementById("Connect");
     divNoConnect.style.display = "none";
     divConnect.style.display = "initial";
-    alert("Vous êtes désormais authentifier avec le pseudo : "+nForm.pseudo.value);
+    alert("Vous êtes désormais authentifié avec le pseudo : "+nForm.pseudo.value);
   }
 }
 
