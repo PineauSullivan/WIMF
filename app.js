@@ -15,6 +15,7 @@ function create(nForm){
 		console.log('channel: ',channel);
 
 	  	var xhr = new XMLHttpRequest();
+	  	var nouveau = true;
 		xhr.onreadystatechange = function($evt){
 			if(xhr.readyState == 4 && xhr.status == 200){
 				var res = JSON.parse(xhr.responseText);
@@ -22,15 +23,17 @@ function create(nForm){
 				if(res.s=="ok"){
 					alert("Vous venez de créer un nouveau channel !");
 				}else{
+					nouveau = false;
 					alert("Vous allez rejoindre un channel déjà existant !");
 				}
 				document.location.href="app/index.html?"+channel;
 			}
 		}
-		xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channel, true);
-		xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
-		xhr.send();
-
+		if(nouveau){
+			xhr.open('PUT', "https://ws.xirsys.com/_ns/www.wimf.com/wimf-foglet/"+channel, true);
+			xhr.setRequestHeader ("Authorization", "Basic " + btoa("WhereIsMyFriends:3fea7eb8-d07b-11e7-be18-fd777e1dd627") );
+			xhr.send();			
+		}
 	}
 
 }
