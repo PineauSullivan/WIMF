@@ -213,7 +213,7 @@ function actualisePosition(id, msg){
         infowindow.open(map, amis[position].marker);
       });
       if(amis[position].inactivif){
-        amis[position].marker.setIcon("iconPositionAmiDC.png");
+        amis[position].marker.setIcon("iconPositionAmi.png");
       }
     }
     amis[position].inactivif =false;
