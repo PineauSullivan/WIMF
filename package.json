@@ -1,0 +1,25 @@
+{
+  "name": "wimf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "cp -R ./node_modules/foglet-core/dist/* dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PineauSullivan/WIMF.git"
+  },
+  "author": "PineauSullivan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PineauSullivan/WIMF/issues"
+  },
+  "homepage": "https://github.com/PineauSullivan/WIMF#readme",
+  "description": "",
+  "dependencies": {
+    "foglet-core": "^3.1.1"
+  },
+  "devDependencies": {
+    "foglet-scripts": "^0.2.4"
+  }
+}

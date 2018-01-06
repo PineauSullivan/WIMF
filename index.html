@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accueil Where Is My Friend</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- foglet-core bundle -->
+    <script src="dist/foglet.bundle.js"></script>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="icon" type="image/png" href="app/favicon.png" />
+  </head>
+  <body>
+    <div class="center-div">
+    <h1>
+    Bienvenue sur
+    </br>
+    Where Is My Friend ?!
+    </h1>
+      <form name="form">
+        <div id="channel">Channel :</div>
+        </br>
+        <input name="channel" type="text">
+        <em>Attention : Nous vous conseillons d'utiliser un nom de channel généré afin que personne ne puisse rejoindre votre channel sans votre consentement !</em>
+        </br>
+        <input class="button" id="buttonCreate" type="button" name="Join" value="Join" onClick="create(this.form)">
+        <input class="button" id="buttonGenerate" type="button" name="Generate" value="Generate" onClick="generate(this.form)">
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+html{ 
+  height: 100% 
+}
+
+body{ 
+  height: 100%; 
+  margin: 0px; 
+  padding: 0px;
+  transition: background-color .5s;
+}
+
+#map_canvas { 
+  height: 100% ; 
+  width:100%;
+  margin-top: 10px;
+}
+
+#bottom{
+  display: inline-block;
+  width: 100%;
+}
+
+#tableau{
+  width: 100%;
+}
+table, th, td{
+  border: 1px solid black;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffa500;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+    height: 90%;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+#listeAmis input[type="button"] {
+    border: solid 1px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 100%;
+}
+
+#listeAmis input[type="button"]:hover {
+    background-color: #999999 !important;
+    color: white;
+}
+
+#Connect{
+  display: none;
+}
