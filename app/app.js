@@ -212,6 +212,9 @@ function actualisePosition(id, msg){
       amis[position].marker.addListener('click', function() {
         infowindow.open(map, amis[position].marker);
       });
+      if(amis[position].inactivif){
+        amis[position].marker.setIcon("iconPositionAmiDC.png");
+      }
     }
     amis[position].inactivif =false;
     amis[position].heure = heure;
@@ -265,6 +268,7 @@ function rechercheInactivite(){
     if(amis[i].inactivif != inactivif){
       console.log("Ami inactif détecté: "+amis[i].pseudo+" - "+amis[i].heure+"h"+amis[i].minute+"h"+amis[i].seconde+"s");
       amis[i].inactivif = inactivif;
+      amis[position].marker.setIcon("iconPositionAmiDC.png");
       forceractualisation= true;
     }
     if(amis[i].inactivif){
